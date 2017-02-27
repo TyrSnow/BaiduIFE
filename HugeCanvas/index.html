@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Canvas Study</title>
+    <!-- CDN -->
+    <link href="http://cdn.bootcss.com/meyer-reset/2.0/reset.min.css" rel="stylesheet">
+
+    <!-- 页面样式 -->
+    <link href="./styles/index.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="app">
+      <div class="controls">
+        <ul>
+          <li class="btn">文字</li>
+          <li class="btn">矩形</li>
+          <li class="btn">圆形</li>
+          <li class="btn">线段</li>
+        </ul>
+        <ul>
+          <li class="btn">删除</li>
+        </ul>
+      </div>
+      <div class="board">
+        <canvas id="canvas_board"></canvas>
+      </div>
+      <div class="preview">
+        <canvas id="canvas_preview"></canvas>
+      </div>
+    </div>
+    <!--
+      基本思路：
+      1、提供一个DrawBoard对象，可以根据指定视口和数据绘制页面
+        DrawBoard会有一个显示比例，显示比例为0的时候，将以整个画布缩小画到视口上
+        对象会负责判断哪些元素在视口里，哪些物品不在视口里
+        对象会判断视口中的物品有没有事件发生，有的话则触发对应的事件
+        主视口也是一个物品，所以预览效果其实是将整个画幅作为视口，这样主视口的框就自然被显示出来了
+        主视口的z轴始终是-1，且只有主视口是-1，其余物品默认是0
+        主视口的scale参数是通过主视口的大小和其对应的canvas大小计算出来的
+      2、app层主要负责视口的移动，物品的创建和移动等操作（主视口也是通过同样的api来完成）
+      3、物品的边框一般是默认值，除非指定（用于设置active等状态）
+      4、事件处理只改数据不重绘
+      5、画布的大小由物体占有的空间决定，缩放的时候视口会自动撑开画布
+
+      功能划分：
+      1、根据viewer将objs列表渲染出来
+      2、实现操作viewer的接口
+      3、实现操作objs的接口
+    -->
+    <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-mousewheel/3.1.12/jquery.mousewheel.min.js"></script>
+
+    <script scr="./js/shim.js"></script>
+    <script src="./js/util.js"></script>
+    <script src="./js/drawBoard.js"></script>
+    <script src="./js/util.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
