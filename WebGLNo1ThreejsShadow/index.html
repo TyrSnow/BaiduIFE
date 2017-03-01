@@ -29,7 +29,7 @@
     <script>
       (function () {
         var PI = 3.1415925;
-        var ifWireFrame = true;
+        var ifWireFrame = false;
         var car = (function () {
           // 做出来一个车
           var obj = new THREE.Object3D();
@@ -112,6 +112,17 @@
           wheel3.rotation.z = PI / 2;
           obj.add(wheel3);
 
+          var plane = new THREE.Mesh(
+            new THREE.PlaneGeometry(100, 100),
+            new THREE.MeshBasicMaterial({
+              color:0x00F0FF,
+              side: THREE.DoubleSide
+            })
+          );
+          plane.position.set(0, -0.7, 0);
+          plane.rotation.x = PI / -2;
+          obj.add(plane);
+
           return obj;
         })();
         var demo = {
@@ -148,7 +159,7 @@
           y: 0,
           z: 5
         }
-        var STEPLENGTH = 0.2;
+        var STEPLENGTH = 1;
         var controls = {
           bindEvent: function () {
             document.getElementById('moveLeft').onclick = function () {

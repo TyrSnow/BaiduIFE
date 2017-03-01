@@ -104,7 +104,11 @@
   // 下面是控制类的函数
   DrawBoard.prototype.zoomIn = function () {
     if (this.viewer.scale < 3) {
-      this.viewer.scale+= 0.1;
+      this.viewer.scale*= 1.25;
+      // 避免来回切换的累积误差
+      if (Math.abs(this.viewer.scale - 1) < 0.01) {
+        this.viewer.scale = 1;
+      }
     } else {
       message('不能再放大了！');
     }
@@ -112,7 +116,11 @@
   DrawBoard.prototype.zoomOut = function () {
     // 最多缩小到0.1
     if (this.viewer.scale > 0.1) {
-      this.viewer.scale-= 0.1;
+      this.viewer.scale*= 0.8;
+      // 避免来回切换的累积误差
+      if (Math.abs(this.viewer.scale - 1) < 0.01) {
+        this.viewer.scale = 1;
+      }
     } else {
       message('不能再缩小了！');
     }
@@ -122,8 +130,8 @@
   }
   DrawBoard.prototype.move = function (derect) {
     this.viewer.pos = [
-      this.viewer.pos[0] - derect[0],
-      this.viewer.pos[1] - derect[1]
+      this.viewer.pos[0] - derect[0] / this.viewer.scale,
+      this.viewer.pos[1] - derect[1] / this.viewer.scale
     ];
   }
   DrawBoard.prototype.moveTo = function (pos) {

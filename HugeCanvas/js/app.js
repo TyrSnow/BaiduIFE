@@ -28,20 +28,22 @@
       },
     })
   ];
-  var objs = [
-    {
-      type: 'rect',
-      fill: true,
-      args: [0, 0, 50, 100]
-    },{
-      type: 'rect',
-      args: [1366,768, 50, 100]
-    },{
-      type: 'rect',
-      fill: true,
-      args: [55,105, 50, 100]
-    }
-  ]
+  // 随机生成1000个小方块
+  var objs = util.createRandomRect(1000, 1000, 1000, 10, 10);
+  // var objs = [
+  //   {
+  //     type: 'rect',
+  //     fill: true,
+  //     args: [0, 0, 50, 100]
+  //   },{
+  //     type: 'rect',
+  //     args: [1366,768, 50, 100]
+  //   },{
+  //     type: 'rect',
+  //     fill: true,
+  //     args: [55,105, 50, 100]
+  //   }
+  // ]
   var id;
   var changed = true;
   var curCommand = 'view'; //与handler对应取值
@@ -96,7 +98,6 @@
         return objs.length - 1;
       },
       resizeObj: function (index, width, height) {
-        console.log(width + ':' + height)
         objs[index].args[2] = width;
         objs[index].args[3] = height;
         changed = true;
@@ -137,6 +138,21 @@
         this.ifMouseDown = false;
         // 画好之后命令返回view
         curCommand = 'view';
+      }
+    },
+    drawCircle: {
+      oriObjX: 0,
+      oriObjY: 0,
+      objIndex: -1,
+      ifMouseDown: false,
+      handleMouseDown: function (e) {
+
+      },
+      handleMouseMove: function (e) {
+
+      },
+      handleMouseUp: function (e) {
+
       }
     },
     view: {

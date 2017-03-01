@@ -17,6 +17,23 @@
         maxY - minY + 5
       ]
     },
+    createRandomRect: function (count, posX, posY, width, height) {
+      var result = [];
+      var fill = true;
+      for (var i = 0; i < count; i++) {
+        result.push({
+          type: 'rect',
+          fill: (fill = !fill),
+          args: [
+            parseInt(Math.random() * posX),
+            parseInt(Math.random() * posY),
+            parseInt(Math.random() * width),
+            parseInt(Math.random() * height)
+          ]
+        })
+      }
+      return result;
+    },
     max: function (a, b) {
       return a > b ? a : b;
     },
