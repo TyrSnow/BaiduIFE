@@ -73,8 +73,8 @@
   // 将当前视口的坐标转换成画板的坐标
   DrawBoard.prototype.translationPos = function (pos) {
     var _pos = [
-      (pos[0] + this.viewer.pos[0]) / this.viewer.scale,
-      (pos[1] + this.viewer.pos[1]) / this.viewer.scale
+      pos[0] / this.viewer.scale + this.viewer.pos[0],
+      pos[1] / this.viewer.scale + this.viewer.pos[1]
     ];
     return _pos;
   }
@@ -130,4 +130,3 @@
   }
   window.DrawBoard = DrawBoard;
 })();
-
