@@ -103,7 +103,11 @@
   }
   // 下面是控制类的函数
   DrawBoard.prototype.zoomIn = function () {
-    this.viewer.scale+= 0.1;
+    if (this.viewer.scale < 3) {
+      this.viewer.scale+= 0.1;
+    } else {
+      message('不能再放大了！');
+    }
   }
   DrawBoard.prototype.zoomOut = function () {
     // 最多缩小到0.1
